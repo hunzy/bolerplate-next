@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import { NextPage } from 'next';
+import Link from 'next/link';
 
 const Home: NextPage<{ userAgent: string }> = (props) => (
   <>
     <Title>Hello world!</Title>
     <UA>user agent: {props.userAgent}</UA>
+
+    <Link href="/about">
+      <a>Go To About Page</a>
+    </Link>
   </>
 );
 
