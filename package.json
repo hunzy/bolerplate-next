@@ -5,7 +5,10 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start"
+    "export": "next export",
+    "lint": "eslint --ext .js,.ts,.tsx src/",
+    "start": "next start -p 80",
+    "typecheck": "tsc"
   },
   "husky": {
     "hooks": {

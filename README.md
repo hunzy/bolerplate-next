@@ -5,3 +5,4 @@
 * prettier
 * husky
 * sort-package-json
+* styled-components
