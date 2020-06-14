@@ -1,7 +1,13 @@
 import React from 'react';
 import { NextPage } from 'next';
-import Todo from 'containers/Todo';
+import TodoList from 'containers/TodoList';
+import TodoInput from 'containers/TodoInput';
 
-const Page: NextPage = () => <Todo />;
+const Page: NextPage = () => (
+  <>
+    <TodoInput />
+    <TodoList />
+  </>
+);
 
 export default Page;

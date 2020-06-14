@@ -8,7 +8,7 @@ interface Props {
   addTodo: () => void;
 }
 
-const InputArea: FC<Props> = ({ inputValue, changeInput, addTodo }) => {
+const TodoInputComponent: FC<Props> = ({ inputValue, changeInput, addTodo }) => {
   return (
     <>
       <InputText placeholder={'Input your todo'} value={inputValue} onChange={changeInput} />
@@ -17,4 +17,4 @@ const InputArea: FC<Props> = ({ inputValue, changeInput, addTodo }) => {
   );
 };
 
-export default InputArea;
+export default TodoInputComponent;

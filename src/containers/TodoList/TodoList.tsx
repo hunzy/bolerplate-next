@@ -5,9 +5,9 @@ interface Props {
   todo: TodoState;
 }
 
-const TodoList: FC<Props> = ({ todo }) => {
+const TodoListComponent: FC<Props> = ({ todo }) => {
   const todoList = todo.map((t) => <li key={t.id}>{t.text}</li>);
   return <ul>{todoList}</ul>;
 };
 
-export default TodoList;
+export default TodoListComponent;
