@@ -1,39 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TodoComponent from './Todo';
-import { addTodo, deleteTodo, fetchTodo } from '../../redux/modules/todo';
+import { changeInput, addTodo, deleteTodo, fetchTodo } from '../../redux/modules/todo';
 import { todoSelector } from '../../redux/selectors';
 
 const Todo = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchTodo());
   }, []);
 
   const todo = useSelector(todoSelector);
-  const [input, setInput] = useState('');
 
-  const handleAddTodo = async () => {
-    const result = await dispatch(
-      addTodo({
-        text: input,
-        completed: false,
-      }),
-    );
-    setInput('');
-  };
-  const handleDeleteTodo = async (id: number) => {
-    await dispatch(deleteTodo(id));
-  };
+  const handleChangeInput = (value: string) => dispatch(changeInput(value));
+  const handleAddTodo = async () => await dispatch(addTodo(todo.input.value));
+  const handleDeleteTodo = async (id: number) => await dispatch(deleteTodo(id));
 
   return (
-    <TodoComponent
-      todo={todo}
-      inputValue={input}
-      changeInput={setInput}
-      addTodo={handleAddTodo}
-      deleteTodo={handleDeleteTodo}
-    />
+    <TodoComponent todo={todo} changeInput={handleChangeInput} addTodo={handleAddTodo} deleteTodo={handleDeleteTodo} />
   );
 };
 

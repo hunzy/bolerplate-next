@@ -1,25 +1,35 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { axiosAddTodo, axiosFetchTodo, axiosDeleteTodo } from 'services/todo';
 
-type Todo = {
+export type Todo = {
   id: number;
   text: string;
   completed: boolean;
 };
 
-type TodoWithoutId = Omit<Todo, 'id'>;
+export type TodoState = {
+  todos: Todo[];
+  input: {
+    value: string;
+    valid: boolean; // trueの場合、バリデーションが通っている
+  };
+};
 
-export type TodoState = Todo[];
-
-const initialState: TodoState = [];
+const initialState: TodoState = {
+  todos: [],
+  input: {
+    value: '',
+    valid: true,
+  },
+};
 
 export const fetchTodo = createAsyncThunk('todo/fetch', async () => {
   const response = await axiosFetchTodo();
-  return response.data as TodoState;
+  return response.data as Todo[];
 });
 
-export const addTodo = createAsyncThunk('todo/add', async (todo: TodoWithoutId) => {
-  const response = await axiosAddTodo(todo);
+export const addTodo = createAsyncThunk('todo/add', async (todoText: string) => {
+  const response = await axiosAddTodo({ text: todoText, completed: false });
   return response.data as Todo;
 });
 
@@ -32,26 +42,24 @@ const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    toggleTodo(state, action: PayloadAction<number>) {
-      const todo = state.find((todo) => todo.id === action.payload);
-      if (todo) {
-        todo.completed = !todo.completed;
-      }
+    changeInput(state, action: PayloadAction<string>) {
+      state.input.value = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTodo.fulfilled, (state, { payload }) => {
-      return payload;
+      state.todos = payload;
     });
     builder.addCase(addTodo.fulfilled, (state, { payload }) => {
-      state.push(payload);
+      state.todos.push(payload);
+      state.input.value = '';
     });
     builder.addCase(deleteTodo.fulfilled, (state, { payload }) => {
-      return state.filter((todo) => todo.id !== payload);
+      state.todos = state.todos.filter((todo) => todo.id !== payload);
     });
   },
 });
 
-export const { toggleTodo } = todoSlice.actions;
+export const { changeInput } = todoSlice.actions;
 
 export default todoSlice.reducer;

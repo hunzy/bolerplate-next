@@ -5,14 +5,13 @@ import { TodoState } from 'redux/modules/todo';
 
 interface Props {
   todo: TodoState;
-  inputValue: string;
   changeInput: (value: string) => void;
   addTodo: () => void;
   deleteTodo: (id: number) => void;
 }
 
-const TodoComponent: FC<Props> = ({ todo, inputValue, changeInput, addTodo, deleteTodo }) => {
-  const todoList = todo.map((t) => (
+const TodoComponent: FC<Props> = ({ todo, changeInput, addTodo, deleteTodo }) => {
+  const todoList = todo.todos.map((t) => (
     <li key={t.id}>
       {t.text}
       <span onClick={() => deleteTodo(t.id)}>[削除]</span>
@@ -21,7 +20,7 @@ const TodoComponent: FC<Props> = ({ todo, inputValue, changeInput, addTodo, dele
 
   return (
     <>
-      <InputText placeholder={'Input your todo'} value={inputValue} onChange={changeInput} />
+      <InputText placeholder={'Input your todo'} value={todo.input.value} onChange={changeInput} />
       <Button onClick={addTodo} text={'追加'} />
       <ul>{todoList}</ul>
     </>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TodoState } from 'redux/modules/todo';
+import { Todo } from 'redux/modules/todo';
 
 const axiosInstance = axios.create({
   baseURL: `http://localhost:8080/todo`,
@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 });
 
 export function axiosFetchTodo() {
-  return axiosInstance.get<TodoState>('');
+  return axiosInstance.get<Todo[]>('');
 }
 
 export function axiosAddTodo(todo: { text: string; completed: boolean }) {
