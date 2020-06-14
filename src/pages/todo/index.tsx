@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextPage } from 'next';
-import TodoList from 'containers/TodoList';
-import TodoInput from 'containers/TodoInput';
+import Todo from 'containers/Todo';
+import { fetchTodo } from 'redux/modules/todo';
+import { useDispatch } from 'react-redux';
 
-const Page: NextPage = () => (
-  <>
-    <TodoInput />
-    <TodoList />
-  </>
-);
+const Page: NextPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTodo());
+  }, []);
+
+  return <Todo />;
+};
 
 export default Page;
