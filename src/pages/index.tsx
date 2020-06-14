@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import Button from '@atoms/Button';
-import InputText from '@atoms/InputText';
 import Search from '@molecules/Search';
 
 const Home: NextPage = () => {
@@ -12,9 +10,7 @@ const Home: NextPage = () => {
     <>
       <Image src="/zeit.svg" alt="" />
       <Title>boilerplate-next</Title>
-      <Button text={'hogehoge'} onClick={handleClick} />
-      <InputText placeholder={'input text'} />
-      <Search onSubmit={handleClick} />
+      <Search value={'sample'} onChange={() => console.log('sample')} onSubmit={handleClick} />
 
       <LinkList>
         <LinkItem>

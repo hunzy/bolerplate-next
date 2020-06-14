@@ -4,13 +4,15 @@ import Button from '@atoms/Button';
 import InputText from '@atoms/InputText';
 
 interface Props {
+  value: string;
+  onChange: (value: string) => void;
   onSubmit: () => void;
 }
 
-const Search: FC<Props> = ({ onSubmit }) => {
+const Search: FC<Props> = ({ value, onChange, onSubmit }) => {
   return (
     <div>
-      <StyledInputText placeholder={'キーワード'} />
+      <StyledInputText placeholder={'キーワード'} value={value} onChange={onChange} />
       <Button text={'送信'} onClick={onSubmit} />
     </div>
   );
