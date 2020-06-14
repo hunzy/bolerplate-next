@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TodoComponent from './Todo';
-import { addTodo, saveTodo } from '../../redux/modules/todo';
+import { addTodo, deleteTodo } from '../../redux/modules/todo';
 import { todoSelector } from '../../redux/selectors';
 
 const Todo = () => {
@@ -10,18 +10,28 @@ const Todo = () => {
   const [input, setInput] = useState('');
   const handleAddTodo = async () => {
     const result = await dispatch(
-      saveTodo({
+      addTodo({
         text: input,
         completed: false,
       }),
     );
-    if (saveTodo.fulfilled.match(result)) {
-      dispatch(addTodo(input));
+    if (addTodo.fulfilled.match(result)) {
       setInput('');
     }
   };
+  const handleDeleteTodo = async (id: number) => {
+    await dispatch(deleteTodo(id));
+  };
 
-  return <TodoComponent todo={todo} inputValue={input} changeInput={setInput} addTodo={handleAddTodo} />;
+  return (
+    <TodoComponent
+      todo={todo}
+      inputValue={input}
+      changeInput={setInput}
+      addTodo={handleAddTodo}
+      deleteTodo={handleDeleteTodo}
+    />
+  );
 };
 
 export default Todo;

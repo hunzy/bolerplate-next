@@ -13,3 +13,7 @@ export function axiosFetchTodo() {
 export function axiosAddTodo(todo: { text: string; completed: boolean }) {
   return axiosInstance.post('', todo);
 }
+
+export function axiosDeleteTodo(id: number) {
+  return axiosInstance.delete(`/${id}`);
+}

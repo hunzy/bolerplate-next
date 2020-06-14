@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { axiosAddTodo, axiosFetchTodo } from 'services/todo';
-let nextTodoId = 0;
+import { axiosAddTodo, axiosFetchTodo, axiosDeleteTodo } from 'services/todo';
 
 type Todo = {
   id: number;
   text: string;
   completed: boolean;
 };
+
+type TodoWithoutId = Omit<Todo, 'id'>;
 
 export type TodoState = Todo[];
 
@@ -17,17 +18,20 @@ export const fetchTodo = createAsyncThunk<TodoState>('todo/fetch', async () => {
   return response.data;
 });
 
-export const saveTodo = createAsyncThunk<void, { text: string; completed: boolean }>('todo/save', async (todo) => {
-  await axiosAddTodo(todo);
+export const addTodo = createAsyncThunk<Todo, TodoWithoutId>('todo/add', async (todo) => {
+  const response = await axiosAddTodo(todo);
+  return response.data as Todo;
+});
+
+export const deleteTodo = createAsyncThunk<number, number>('todo/delete', async (id) => {
+  await axiosDeleteTodo(id);
+  return id;
 });
 
 const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    addTodo(state, action: PayloadAction<string>) {
-      state.push({ id: ++nextTodoId, text: action.payload, completed: false });
-    },
     toggleTodo(state, action: PayloadAction<number>) {
       const todo = state.find((todo) => todo.id === action.payload);
       if (todo) {
@@ -37,17 +41,17 @@ const todoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTodo.fulfilled, (state, { payload }) => {
-      const todos = payload;
-      nextTodoId = todos[todos.length - 1].id;
-      return todos;
+      return payload;
     });
-    builder.addCase(saveTodo.fulfilled, (state, { payload }) => {
-      console.log('--- extraReducers ---');
-      console.log(payload);
+    builder.addCase(addTodo.fulfilled, (state, { payload }) => {
+      state.push(payload);
+    });
+    builder.addCase(deleteTodo.fulfilled, (state, { payload }) => {
+      return state.filter((todo) => todo.id !== payload);
     });
   },
 });
 
-export const { addTodo, toggleTodo } = todoSlice.actions;
+export const { toggleTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

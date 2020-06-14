@@ -8,10 +8,16 @@ interface Props {
   inputValue: string;
   changeInput: (value: string) => void;
   addTodo: () => void;
+  deleteTodo: (id: number) => void;
 }
 
-const TodoComponent: FC<Props> = ({ todo, inputValue, changeInput, addTodo }) => {
-  const todoList = todo.map((t) => <li key={t.id}>{t.text}</li>);
+const TodoComponent: FC<Props> = ({ todo, inputValue, changeInput, addTodo, deleteTodo }) => {
+  const todoList = todo.map((t) => (
+    <li key={t.id}>
+      {t.text}
+      <span onClick={() => deleteTodo(t.id)}>[削除]</span>
+    </li>
+  ));
 
   return (
     <>
