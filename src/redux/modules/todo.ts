@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { axiosAddTodo, axiosFetchTodo } from 'services/todo';
 let nextTodoId = 0;
 
 type Todo = {
@@ -13,12 +13,12 @@ export type TodoState = Todo[];
 const initialState: TodoState = [];
 
 export const fetchTodo = createAsyncThunk<TodoState>('todo/fetch', async () => {
-  const response = await axios.get('http://localhost:8080/todos');
+  const response = await axiosFetchTodo();
   return response.data;
 });
 
 export const saveTodo = createAsyncThunk<void, { text: string; completed: boolean }>('todo/save', async (todo) => {
-  await axios.post('http://localhost:8080/todos', todo);
+  await axiosAddTodo(todo);
 });
 
 const todoSlice = createSlice({
