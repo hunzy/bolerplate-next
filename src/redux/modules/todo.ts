@@ -13,17 +13,17 @@ export type TodoState = Todo[];
 
 const initialState: TodoState = [];
 
-export const fetchTodo = createAsyncThunk<TodoState>('todo/fetch', async () => {
+export const fetchTodo = createAsyncThunk('todo/fetch', async () => {
   const response = await axiosFetchTodo();
-  return response.data;
+  return response.data as TodoState;
 });
 
-export const addTodo = createAsyncThunk<Todo, TodoWithoutId>('todo/add', async (todo) => {
+export const addTodo = createAsyncThunk('todo/add', async (todo: TodoWithoutId) => {
   const response = await axiosAddTodo(todo);
   return response.data as Todo;
 });
 
-export const deleteTodo = createAsyncThunk<number, number>('todo/delete', async (id) => {
+export const deleteTodo = createAsyncThunk('todo/delete', async (id: number) => {
   await axiosDeleteTodo(id);
   return id;
 });
