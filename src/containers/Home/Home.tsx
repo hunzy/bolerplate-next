@@ -3,15 +3,17 @@ import Search from '@molecules/Search';
 import styled from 'styled-components';
 
 interface Props {
-  submit: () => void;
+  keyword: string;
+  onChangeKeyword: (value: string) => void;
+  onSubmit: () => void;
 }
 
-const HomeComponent: FC<Props> = ({ submit }) => {
+const HomeComponent: FC<Props> = ({ keyword, onChangeKeyword, onSubmit }) => {
   return (
     <>
       <Image src="/zeit.svg" alt="" />
       <Title>boilerplate-next</Title>
-      <Search value={'sample'} onChange={() => console.log('sample')} onSubmit={submit} />
+      <Search value={keyword} onChange={onChangeKeyword} onSubmit={onSubmit} />
     </>
   );
 };
