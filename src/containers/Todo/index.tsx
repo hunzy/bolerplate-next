@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import TodoComponent from './Todo';
+import { TodoComponent } from './Todo';
 import { changeInput, addTodo, deleteTodo, fetchTodo } from '../../redux/modules/todo';
 import { todoSelector } from '../../redux/selectors';
 
-const Todo = () => {
+export const Todo = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,5 +21,3 @@ const Todo = () => {
     <TodoComponent todo={todo} changeInput={handleChangeInput} addTodo={handleAddTodo} deleteTodo={handleDeleteTodo} />
   );
 };
-
-export default Todo;

@@ -8,7 +8,7 @@ interface Props {
   onChange: (value: string) => void;
 }
 
-const InputText: FC<Props> = ({ className, placeholder, value, onChange }) => {
+export const InputText: FC<Props> = ({ className, placeholder, value, onChange }) => {
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
@@ -20,5 +20,3 @@ const StyledInput = styled.input`
   border: 1px solid #333;
   border-radius: 4px;
 `;
-
-export default InputText;

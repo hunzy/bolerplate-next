@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Search from '@molecules/Search';
+import { Search } from '@molecules/Search';
 import styled from 'styled-components';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   onSubmit: () => void;
 }
 
-const HomeComponent: FC<Props> = ({ keyword, onChangeKeyword, onSubmit }) => {
+export const HomeComponent: FC<Props> = ({ keyword, onChangeKeyword, onSubmit }) => {
   return (
     <>
       <Image src="/zeit.svg" alt="" />
@@ -26,5 +26,3 @@ const Title = styled.h1`
   font-size: 60px;
   margin-bottom: 40px;
 `;
-
-export default HomeComponent;

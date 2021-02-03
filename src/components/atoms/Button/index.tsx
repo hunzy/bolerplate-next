@@ -7,7 +7,7 @@ interface Props {
   onClick: () => void;
 }
 
-const Button: FC<Props> = ({ className, text, onClick }) => {
+export const Button: FC<Props> = ({ className, text, onClick }) => {
   return (
     <StyledButton className={className} onClick={onClick}>
       {text}
@@ -20,5 +20,3 @@ const StyledButton = styled.button`
   border: 1px solid #333;
   border-radius: 8px;
 `;
-
-export default Button;

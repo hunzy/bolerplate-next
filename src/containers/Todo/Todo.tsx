@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import InputText from '@atoms/InputText';
-import Button from '@atoms/Button';
+import { InputText } from '@atoms/InputText';
+import { Button } from '@atoms/Button';
 import { TodoState } from 'redux/modules/todo';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   deleteTodo: (id: number) => void;
 }
 
-const TodoComponent: FC<Props> = ({ todo, changeInput, addTodo, deleteTodo }) => {
+export const TodoComponent: FC<Props> = ({ todo, changeInput, addTodo, deleteTodo }) => {
   const todoList = todo.todos.map((t) => (
     <li key={t.id}>
       {t.text}
@@ -26,5 +26,3 @@ const TodoComponent: FC<Props> = ({ todo, changeInput, addTodo, deleteTodo }) =>
     </>
   );
 };
-
-export default TodoComponent;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Button from '@atoms/Button';
-import InputText from '@atoms/InputText';
+import { Button } from '@atoms/Button';
+import { InputText } from '@atoms/InputText';
 
 interface Props {
   value: string;
@@ -9,7 +9,7 @@ interface Props {
   onSubmit: () => void;
 }
 
-const Search: FC<Props> = ({ value, onChange, onSubmit }) => {
+export const Search: FC<Props> = ({ value, onChange, onSubmit }) => {
   return (
     <div>
       <StyledInputText placeholder={'キーワード'} value={value} onChange={onChange} />
@@ -21,5 +21,3 @@ const Search: FC<Props> = ({ value, onChange, onSubmit }) => {
 const StyledInputText = styled(InputText)`
   margin-right: 8px;
 `;
-
-export default Search;

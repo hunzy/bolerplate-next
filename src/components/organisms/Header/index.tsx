@@ -8,7 +8,7 @@ const links: { href: string; text: string }[] = [
   { href: '/todo', text: 'Todo' },
 ];
 
-const Header: FC = () => {
+export const Header: FC = () => {
   return (
     <Wrapper>
       <Link href={'/'}>
@@ -59,5 +59,3 @@ const Anchor = styled.a`
     text-decoration: underline;
   }
 `;
-
-export default Header;

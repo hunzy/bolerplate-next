@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import styled from 'styled-components';
 import 'ress';
-import store from 'redux/store';
-import Header from '@organisms/Header';
+import { store } from 'redux/store';
+import { Header } from '@organisms/Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
