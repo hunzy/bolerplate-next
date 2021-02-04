@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Search } from '@molecules/Search';
 import styled from 'styled-components';
+import { Search } from '@molecules/Search';
 
 interface Props {
   keyword: string;

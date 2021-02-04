@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { InputText } from '@atoms/InputText';
 import { Button } from '@atoms/Button';
+import { InputText } from '@atoms/InputText';
 import { TodoState } from 'redux/modules/todo';
 
 interface Props {

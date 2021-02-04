@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 
 const links: { href: string; text: string }[] = [
   { href: '/', text: 'Home' },

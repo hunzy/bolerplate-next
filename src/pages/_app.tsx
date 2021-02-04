@@ -1,10 +1,10 @@
+import { AppProps } from 'next/app';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { AppProps } from 'next/app';
 import styled from 'styled-components';
+import { Header } from '@organisms/Header';
 import 'ress';
 import { store } from 'redux/store';
-import { Header } from '@organisms/Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
