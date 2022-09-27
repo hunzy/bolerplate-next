@@ -1,8 +1,7 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { TodoState } from '../modules/todo';
+import { createSelector } from 'reselect';
 import { RootState } from '../store';
 
-export const todoSelector = createSelector<RootState, TodoState, TodoState>(
-  (state) => state.todo,
+export const todoSelector = createSelector(
+  (state: RootState) => state.todo,
   (todo) => todo,
 );

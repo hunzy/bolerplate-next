@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { changeInput, addTodo, deleteTodo, fetchTodo } from '../../redux/modules/todo';
 import { todoSelector } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
 import { TodoComponent } from './Todo';
 
 export const Todo = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchTodo());
